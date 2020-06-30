@@ -13,11 +13,15 @@ import colors from "./Colors";
 import TodoList from "./components/TodoList";
 import AddListModal from "./components/AddListModal";
 import Fire from "./Fire";
-import {decode, encode} from 'base-64'
+import { decode, encode } from "base-64";
 
-if (!global.btoa) {  global.btoa = encode }
+if (!global.btoa) {
+  global.btoa = encode;
+}
 
-if (!global.atob) { global.atob = decode }
+if (!global.atob) {
+  global.atob = decode;
+}
 
 export default class App extends React.Component {
   state = {
