@@ -21,6 +21,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.ramasentani.rntodolist",
+      "versionCode": 1
     }
   }
 }
