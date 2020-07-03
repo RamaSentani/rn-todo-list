@@ -8,12 +8,19 @@ import {
   Modal,
   ActivityIndicator,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import {
+  AntDesign
+} from "@expo/vector-icons";
 import colors from "./Colors";
 import TodoList from "./components/TodoList";
 import AddListModal from "./components/AddListModal";
 import Fire from "./Fire";
-import { decode, encode } from "base-64";
+
+import {
+  decode,
+  encode
+}
+from "base-64";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -38,12 +45,19 @@ export default class App extends React.Component {
       }
 
       firebase.getLists((lists) => {
-        this.setState({ lists, user }, () => {
-          this.setState({ loading: false });
+        this.setState({
+          lists,
+          user
+        }, () => {
+          this.setState({
+            loading: false
+          });
         });
       });
 
-      this.setState({ user });
+      this.setState({
+        user
+      });
     });
   }
 
@@ -52,11 +66,19 @@ export default class App extends React.Component {
   }
 
   toggleAddTodoModal() {
-    this.setState({ addTodoVisible: !this.state.addTodoVisible });
+    this.setState({
+      addTodoVisible: !this.state.addTodoVisible
+    });
   }
 
   renderList = (list) => {
-    return <TodoList list={list} updateList={this.updateList} />;
+    return <TodoList list = {
+      list
+    }
+    updateList = {
+      this.updateList
+    }
+    />;
   };
 
   addList = (list) => {
@@ -73,56 +95,129 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.loading) {
-      return (
-        <View style={styles.container}>
-          <ActivityIndicator size="large" color={colors.blue} />
-        </View>
+      return ( <
+        View style = {
+          styles.container
+        } >
+        <
+        ActivityIndicator size = "large"
+        color = {
+          colors.blue
+        }
+        /> < /
+        View >
       );
     }
-    return (
-      <View style={styles.container}>
-        <Modal
-          animationType="slide"
-          visible={this.state.addTodoVisible}
-          onRequestClose={() => this.toggleAddTodoModal()}
-        >
-          <AddListModal
-            closeModal={() => this.toggleAddTodoModal()}
-            addList={this.addList}
-          />
-        </Modal>
-        <View style={{ flexDirection: "row" }}>
-          <View style={styles.divider} />
+    return ( <
+      View style = {
+        styles.container
+      } >
+      <
+      Modal animationType = "slide"
+      visible = {
+        this.state.addTodoVisible
+      }
+      onRequestClose = {
+        () => this.toggleAddTodoModal()
+      } >
+      <
+      AddListModal closeModal = {
+        () => this.toggleAddTodoModal()
+      }
+      addList = {
+        this.addList
+      }
+      /> < /
+      Modal > <
+      View style = {
+        {
+          flexDirection: "row"
+        }
+      } >
+      <
+      View style = {
+        styles.divider
+      }
+      />
 
-          <Text style={styles.title}>
-            Todo
-            <Text style={{ fontWeight: "300", color: colors.blue }}>Lists</Text>
-          </Text>
-          <View style={styles.divider} />
-        </View>
+      <
+      Text style = {
+        styles.title
+      } >
+      Todo <
+      Text style = {
+        {
+          fontWeight: "300",
+          color: colors.blue
+        }
+      } > Lists < /Text> < /
+      Text > <
+      View style = {
+        styles.divider
+      }
+      /> < /
+      View >
 
-        <View style={{ marginVertical: 48 }}>
-          <TouchableOpacity
-            style={styles.addList}
-            onPress={() => this.toggleAddTodoModal()}
-          >
-            <AntDesign name="plus" size={16} color={colors.lightBlue} />
-          </TouchableOpacity>
+      <
+      View style = {
+        {
+          marginVertical: 48
+        }
+      } >
+      <
+      TouchableOpacity style = {
+        styles.addList
+      }
+      onPress = {
+        () => this.toggleAddTodoModal()
+      } >
+      <
+      AntDesign name = "plus"
+      size = {
+        16
+      }
+      color = {
+        colors.lightBlue
+      }
+      /> < /
+      TouchableOpacity >
 
-          <Text style={styles.add}>Add List</Text>
-        </View>
+      <
+      Text style = {
+        styles.add
+      } > Add List < /Text> < /
+      View >
 
-        <View style={{ height: 275, paddingLeft: 32 }}>
-          <FlatList
-            data={this.state.lists}
-            keyExtractor={(item) => item.id.toString()}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => this.renderList(item)}
-            keyboardShouldPersistTaps="always"
-          />
-        </View>
-      </View>
+      <
+      View style = {
+        {
+          height: 275,
+          paddingLeft: 32
+        }
+      } >
+      <
+      FlatList data = {
+        this.state.lists
+      }
+      keyExtractor = {
+        (item) => item.id.toString()
+      }
+      horizontal = {
+        true
+      }
+      showsHorizontalScrollIndicator = {
+        false
+      }
+      renderItem = {
+        ({
+          item
+        }) => this.renderList(item)
+      }
+      keyboardShouldPersistTaps = "always" /
+      >
+      <
+      /View> < /
+      View >
     );
   }
 }
