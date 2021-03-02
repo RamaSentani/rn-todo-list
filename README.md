@@ -1,4 +1,4 @@
-# Final Project - Todo App
+# Todo App
 
 ## Objectives
 
